@@ -1,10 +1,20 @@
 #单向
 #LIS数组存储的是对应长度为i+1的最长子串的最小值，如LIS[3]=7,就是说当最长子串为4时，可以选数组里7这个数字
-def getSub(arr,sub_len):
-    index=0
-    for i in range(0,len(arr)):
-        index=index+1
-        if index<sub_len:
+def getSub(arr,sub_len,len):
+    index=1
+    sub=[]
+
+    for i in range(1,len):
+
+        if index<=sub_len and arr[i]>arr[i-1]:
+            sub.append(arr[i-1])
+            index = index + 1
+            if index==sub_len:
+                if arr[i]>arr[i-1]:
+                    sub.append(arr[i])
+                    break
+    return sub
+
 
 
 # def MAX(LIS,len):
@@ -54,3 +64,5 @@ if __name__ == '__main__':
     len = len(data_list)
     print(LIS(data_list,len))
     sub_len=LIS(data_list,len)
+    sub=getSub(data_list,sub_len,len)
+    print(sub)
