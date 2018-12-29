@@ -21,46 +21,31 @@ Sample Output 1
 
 3 3 9 12 24 29 34 49 51 56 78 84 100
 """
+import sys
 def bubble():
-    temp_list=input().split()
-    length=int(temp_list[0])
-    data_list=[]
-    for i in range(1,length+1):
-        data_list.append(int(temp_list[i]))
-    for i in range(0,length):#把大的往后
-        for j in range(0,length-i-1):#每次最大的在最后，且不哟名走到最后一个
-            if data_list[j]>data_list[j+1]:
-                (data_list[j],data_list[j+1])=(data_list[j+1],data_list[j])
-    #这样最后一个会有空格
-    # for e in data_list:
-    #     print(e,end=' ')
-    s=''
-    for e in data_list:
-        s+=str(e)
-        s+=' '
-    print(s.strip())
-
-
-
+    for line in sys.stdin:
+        temp_list=line.split()
+        if not temp_list:
+            break
+        length=int(temp_list[0])
+        data_list=[]
+        for i in range(1,length+1):
+            data_list.append(int(temp_list[i]))
+        for i in range(0,length):#把大的往后
+            for j in range(0,length-i-1):#每次最大的在最后，且不哟名走到最后一个
+                if data_list[j]>data_list[j+1]:
+                    (data_list[j],data_list[j+1])=(data_list[j+1],data_list[j])
+        #这样最后一个会有空格
+        # for e in data_list:
+        #     print(e,end=' ')
+        s=''
+        for e in data_list:
+            s+=str(e)
+            s+=' '
+        print(s.strip())
 
 
 if __name__ == '__main__':
     bubble()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

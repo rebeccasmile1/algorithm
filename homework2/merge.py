@@ -22,7 +22,7 @@ Sample Output 1
 3 3 9 12 24 29 34 49 51 56 78 84 100
 """
 import math
-
+import sys
 
 def merge(list, low, mid, high):
     left = list[low:mid]
@@ -43,31 +43,34 @@ def merge(list, low, mid, high):
 
 
 def merge_sort():
-    temp_list = input().split()
-    data_list = []
-    length = int(temp_list[0])
-    for i in range(1, length + 1):
-        data_list.append(int(temp_list[i]))
+    for line in sys.stdin:
+        temp_list = line.split()
+        if not temp_list:
+            break
+        data_list = []
+        length = int(temp_list[0])
+        for i in range(1, length + 1):
+            data_list.append(int(temp_list[i]))
 
-    # time=math.log(length,2)
-    # for i in range(1,time+1):
-    #     merge(e for e in data_list)
+        # time=math.log(length,2)
+        # for i in range(1,time+1):
+        #     merge(e for e in data_list)
 
-    i = 1
-    while i < length:  # 子数组长度
-        low = 0
-        while low < length:
-            mid = low + i
-            high = min(mid + i, length)
-            if mid<high:
-                merge(data_list,low,mid,high)
-            low += 2 * i
-        i *= 2
-    s=''
-    for e in data_list:
-        s+=str(e)
-        s+=' '
-    print(s)
+        i = 1
+        while i < length:  # 子数组长度
+            low = 0
+            while low < length:
+                mid = low + i
+                high = min(mid + i, length)
+                if mid<high:
+                    merge(data_list,low,mid,high)
+                low += 2 * i
+            i *= 2
+        s=''
+        for e in data_list:
+            s+=str(e)
+            s+=' '
+        print(s.strip())
 
 
 if __name__ == '__main__':

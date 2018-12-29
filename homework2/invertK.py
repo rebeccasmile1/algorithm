@@ -17,26 +17,29 @@ Sample Output 1
 3 2 1 6 5 4 7 8
 d c b a h g f e
 """
-
+import sys
 def invert():
-    temp_list=input().split()
-    length=int(temp_list[0])
-    K=int(temp_list[-1])
-    data_list=[]
-    for i in range(1,length+1):
-        data_list.append(temp_list[i])
-    i=0
-    while (i+K)<=length:
-        s=0
-        for j in range(i,i+K//2):
-            (data_list[j],data_list[i+K-1-s])=(data_list[i+K-1-s],data_list[j])
-            s+=1
-        i+=K
-    string=''
-    for e in data_list:
-        string+=e
-        string+=' '
-    print(string.strip())
+    for line in sys.stdin:
+        temp_list=line.split()
+        if not temp_list:
+            break
+        length=int(temp_list[0])
+        K=int(temp_list[-1])
+        data_list=[]
+        for i in range(1,length+1):
+            data_list.append(temp_list[i])
+        i=0
+        while (i+K)<=length:
+            s=0
+            for j in range(i,i+K//2):
+                (data_list[j],data_list[i+K-1-s])=(data_list[i+K-1-s],data_list[j])
+                s+=1
+            i+=K
+        string=''
+        for e in data_list:
+            string+=e
+            string+=' '
+        print(string.strip())
 
 
 
@@ -47,16 +50,6 @@ if __name__ == '__main__':
     # else:
     #     print('b')
     invert()
-
-
-
-
-
-
-
-
-
-
 
 
 

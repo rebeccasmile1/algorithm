@@ -23,27 +23,21 @@ false
 import sys
 def is_plalindrome():
     for line in sys.stdin:
-        if not line:
-            break
         flag='true'
         temp_list=line.split()
+        if not temp_list:
+            break
         length=int(temp_list[0])
-        # data_list=[]
-        # for i in range(1,length+1):
-        #     data_list.append(int(temp_list[i]))
-        for i in range(1,(length+1)//2):
-            if temp_list[i]!=temp_list[length-1-i]:
+        data_list=[]
+        for i in range(1,length+1):
+            data_list.append(temp_list[i])
+        for i in range(0,(length)//2):
+            if data_list[i]!=data_list[length-1-i]:
                 flag= 'false'
-                print(flag)
-                break
 
+                break
         print(flag)
 
 
-
-
 if __name__ == '__main__':
-    if is_plalindrome():
-        print('true')
-    else:
-        print('false')
+    is_plalindrome()
