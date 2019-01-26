@@ -48,9 +48,5 @@ def insert_sort():
         print(s.strip())
 
 
-
-
-
-
 if __name__ == '__main__':
     insert_sort()

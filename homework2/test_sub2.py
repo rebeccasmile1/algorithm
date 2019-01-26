@@ -25,7 +25,8 @@ class LCS():
     def input(self, x, y):
         # 读入待匹配的两个字符串
         if type(x) != str or type(y) != str:
-            print('input error')
+            print
+            'input error'
             return None
         self.x = x
         self.y = y
@@ -33,17 +34,16 @@ class LCS():
     def Compute_LCS(self):
         xlength = len(self.x)
         ylength = len(self.y)
-        self.direction_list = [None]*xlength  # 这个二维列表存着回溯方向
-        for i in range(xlength):#m*n
-            self.direction_list[i] = [None]*ylength
-
+        self.direction_list = [None] * xlength  # 这个二维列表存着回溯方向
         # print(self.direction_list)
-
-        # 这个二维列表存着当前最长公共子序列长度
-        self.lcslength_list = [None]*(xlength + 1)
-        for j in range(xlength + 1):#(m+1)*(n+1)
-            self.lcslength_list[j] = [None]*(ylength + 1)
-
+        for i in range(xlength):
+            self.direction_list[i] = [None] * ylength
+        # print(self.direction_list)
+        self.lcslength_list = [None] * (xlength + 1)
+        # print(len(self.lcslength_list))
+        # 这个二维列表存着当前最长公共子序列长度，0列全为0，0行全为0
+        for j in range(xlength + 1):
+            self.lcslength_list[j] = [None] * (ylength + 1)
         for i in range(0, xlength + 1):
             self.lcslength_list[i][0] = 0
         for j in range(0, ylength + 1):
@@ -54,10 +54,10 @@ class LCS():
                 if self.x[i - 1] == self.y[j - 1]:
                     self.lcslength_list[i][j] = self.lcslength_list[i - 1][j - 1] + 1
                     self.direction_list[i - 1][j - 1] = 0  # 左上
-                elif self.lcslength_list[i - 1][j] > self.lcslength_list[i][j - 1]:#行大
+                elif self.lcslength_list[i - 1][j] > self.lcslength_list[i][j - 1]:
                     self.lcslength_list[i][j] = self.lcslength_list[i - 1][j]
                     self.direction_list[i - 1][j - 1] = 1  # 上
-                elif self.lcslength_list[i - 1][j] < self.lcslength_list[i][j - 1]:#列大
+                elif self.lcslength_list[i - 1][j] < self.lcslength_list[i][j - 1]:
                     self.lcslength_list[i][j] = self.lcslength_list[i][j - 1]
                     self.direction_list[i - 1][j - 1] = -1  # 左
                 else:
@@ -69,12 +69,12 @@ class LCS():
     def printLCS(self, curlen, i, j, s):
         if i == 0 or j == 0:
             return None
-        #i，j是长度
+
         if self.direction_list[i - 1][j - 1] == 0:
             if curlen == self.lcslength:
                 s += self.x[i - 1]
                 for i in range(len(s) - 1, -1, -1):
-                    print(s[i],end='')
+                    print(s[i], end='')
                 print('\n')
 
             elif curlen < self.lcslength:
@@ -84,7 +84,7 @@ class LCS():
             self.printLCS(curlen, i - 1, j, s)
         elif self.direction_list[i - 1][j - 1] == -1:
             self.printLCS(curlen, i, j - 1, s)
-        else:#以下说明会有多种可能
+        else:
             self.printLCS(curlen, i - 1, j, s)
             self.printLCS(curlen, i, j - 1, s)
 
@@ -95,10 +95,8 @@ class LCS():
 
 if __name__ == '__main__':
     p = LCS()
-    listA=input()
-    listB=input()
-    # print(listA)
-    # print(listB)
+    listA = input()
+    listB = input()
     p.input(listA, listB)
     p.Compute_LCS()
     p.returnLCS()
