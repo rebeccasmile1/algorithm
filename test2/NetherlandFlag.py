@@ -17,8 +17,13 @@ def partition(arr,L,R,num):
             (arr[cur],arr[more])=(arr[more],arr[cur])
         else:
             cur+=1
-
-    return arr
+    arr1=[]
+    for e in arr[less+1:more]:
+        arr1.append(e)
+    arr2=[]
+    arr2.append(less+1)
+    arr2.append(more-1)
+    return arr2#表示等于阈值的起始下标和结束下标
 
 if __name__ == '__main__':
     # NetherlandFlag()
